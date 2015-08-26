@@ -25,3 +25,55 @@ export interface MousePosition {
 //   	dropPoint() { ... }                          // remove the oldest point
 //  	getCount(): number { ... }                   // get the current count
 //  	getPoint(i: number): MousePosition { ... }   // get point number "i" (not array element "i")
+
+export class PointSet{
+
+
+    private buffer = new Array(30);
+    private start = -1;
+    private count = 0;
+
+    addPoint(m: MousePosition){
+        //if buffer is initially empty, add to front, increment start and count
+        if(this.start == -1 && this.count == 0){
+            this.start++;
+            this.count++;
+            this.buffer[0] = m;
+        }
+        //else add to rear and increment count
+        else{
+            //if adding regularly to rear, use mod to add to correct location
+            if(this.count < 30){
+                this.buffer[((this.count+this.start) % this.buffer.length)] = m;
+                this.count++;
+            }
+            //else if buffer is full, drop point, start to 0, and add new point
+            else{
+                if(this.start == 29){
+                    this.buffer[this.start] = m;
+                    this.start = 0;
+                }
+                else{
+                    this.buffer[this.start] = m;
+                    this.start++;
+                }
+
+            }
+        }
+    }
+
+    dropPoint(){
+        this.buffer[this.start] = null;
+        this.start = (this.start + 1) % this.buffer.length;
+        if(this.count != 0){
+            this.count--;
+        }
+
+    }
+
+    getCount(): number{ return this.count; }
+
+    getPoint(i: number): MousePosition{
+        return (this.buffer[ (this.start + i) % this.buffer.length]);
+    }
+}

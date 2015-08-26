@@ -68,28 +68,41 @@ class Drawing {
         // add a point to the points object for the current mouse position (if the mouse position
         // is over the canvas and we've received it from onmousemove below).  
         // If the mouse isn't over the canvas, drop the oldest point instead.
+        if(this.mousePosition) {
+            console.log("adding point" + this.mousePosition);
+            this.points.addPoint(this.mousePosition);
+        }
+        else{
+            console.log("dropping point");
+            this.points.dropPoint();
+        }
 
 
 
-        
         const rectCount = this.rects.length;
         // draw rectangles first
-         
-
+        for(var i = 0; i < rectCount; i++){
+            this.ctx.fillStyle = this.rects[i].color;
+            this.ctx.fillRect(this.rects[i].p1.x, this.rects[i].p1.y, this.rects[i].p2.x - this.rects[i].p1.x, this.rects[i].p2.y - this.rects[i].p1.y);
+        }
 
 
         const pointCount = this.points.getCount();
         // draw blue points with the oldest ones more transparent, 3x3 in size
         // hint: use the point number to create an rgba color
         // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgba()
-                    
+        for(var i = 0; i < pointCount; i++){
+            var transparency = i/30;
+            this.ctx.fillStyle = "rgba(0, 0, 255, " + transparency + ")";
+            this.ctx.fillRect(this.points.getPoint(i).x - 1.5, this.points.getPoint(i).y - 1.5, 3, 3);
+        }
 
+                    
 
         // if we've clicked, draw the rubber band.  use a strokeStyle of gray, and use strokeRect instead of fillRect
         if (this.clickStart) {
-            
-            
-            
+            this.ctx.strokeStyle = "rgb(80,80,80)";
+            this.ctx.strokeRect(this.clickStart.x, this.clickStart.y, this.mousePosition.x - this.clickStart.x, this.mousePosition.y- this.clickStart.y);
         }
 
         // do it again!  and again!  AND AGAIN!  AND ...       
@@ -115,7 +128,8 @@ class Drawing {
                     p2: clickEnd,
                     color: getRandomColor()
                 };      
-                this.rects.push(rect);          
+                this.rects.push(rect);
+                console.dir(this.rects);
                 this.clickStart = undefined; 
             }
         }
@@ -124,7 +138,8 @@ class Drawing {
             const m = getOffset(ev);
             this.mousePosition = m;
         }
-        
+
+        //when mouse goes off canvas
         canv.onmouseout = (ev: MouseEvent) => {
             this.mousePosition = undefined;
             this.clickStart = undefined;
