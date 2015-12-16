@@ -57,7 +57,6 @@ export class PointSet{
                     this.buffer[this.start] = m;
                     this.start++;
                 }
-
             }
         }
     }
@@ -68,7 +67,6 @@ export class PointSet{
         if(this.count != 0){
             this.count--;
         }
-
     }
 
     getCount(): number{ return this.count; }

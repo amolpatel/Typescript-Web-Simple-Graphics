@@ -68,12 +68,10 @@ class Drawing {
         // add a point to the points object for the current mouse position (if the mouse position
         // is over the canvas and we've received it from onmousemove below).  
         // If the mouse isn't over the canvas, drop the oldest point instead.
-        if(this.mousePosition) {
-            console.log("adding point" + this.mousePosition);
+        if(this.mousePosition != undefined) {
             this.points.addPoint(this.mousePosition);
         }
         else{
-            console.log("dropping point");
             this.points.dropPoint();
         }
 
@@ -100,9 +98,9 @@ class Drawing {
                     
 
         // if we've clicked, draw the rubber band.  use a strokeStyle of gray, and use strokeRect instead of fillRect
-        if (this.clickStart) {
+        if (this.clickStart && this.mousePosition) {
             this.ctx.strokeStyle = "rgb(80,80,80)";
-            this.ctx.strokeRect(this.clickStart.x, this.clickStart.y, this.mousePosition.x - this.clickStart.x, this.mousePosition.y- this.clickStart.y);
+            this.ctx.strokeRect(this.clickStart.x - 0.5, this.clickStart.y - 0.5, this.mousePosition.x - this.clickStart.x, this.mousePosition.y- this.clickStart.y);
         }
 
         // do it again!  and again!  AND AGAIN!  AND ...       
