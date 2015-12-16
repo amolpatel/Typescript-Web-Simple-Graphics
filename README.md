@@ -1,14 +1,10 @@
 # Assignment 0:  Typescript, Web, Simple Graphics warmup 
 
-This is a skeleton, based on ex1, of a small web drawing program in TypeScript.  This is the starting point for a0. 
-
-## Due: Wednesday Aug 26th, 11:59pm
-
 ## Overview 
 
-The goal of this assignment is have you get experience with Typescript, create a simple data structure common in graphics (a circular buffer), gain experience with the common structure of interactive graphical program (not just on the web), and ensure your development and debugging environments are set up before the first larger assignment.
+The goal of this assignment is have you get experience with Typescript, create a simple data structure common in graphics (a circular buffer), gain experience with the common structure of interactive graphical program (not just on the web), and ensure your development and debugging environments are set up.
 
-Your assigment is to complete the implementation of a0.ts and pointset.ts so that the program behaves as demonstrated in class and described here and in the code comments.  The result should look like this:
+The result should look like this:
 
 ![Screencast of sample solution](a0.gif)
 
@@ -21,23 +17,6 @@ In particular:
 5. when the user clicks and drags, a grey hollow rectagle should be traced out from the start point to the current mouse location.  If the user releases the button, a rectangle of random color should be created.  If the user moves the mouse out of the canvas, the rectangle creation should be canceled.
 6. the canvas should be redrawn each animation frame, and nothing should be drawn in the canvas outside of the render function.
 
-Your grade will be based on satisfying each of these requirements.
-
-# Submission
-
-You should submit a clean project folder in a zip file to t-square.  That means should clean the folder before submission.  We suggest the following:
-
-1. copy the folder to a new location 
-2. delete the ".git", "js" and "node_modules" directories
-3. delete ".gitignore"
-
-You should have a0.html, a0.css, a0.ts, pointset.ts, README.md, tsconfig.json, package.json, gulpfile.js remaining (of the files in the sampel: you may have other files if you create them).
-
-**Do Not Change the names** of a0.html and a0.ts.  The TAs need to be able to test your program as follows:
-
-1. cd into the directory and run ```npm install```
-2. compile with ```tsc```
-3. open and view the web page ```a0.html```
 
 Please test that your submission meets these requirements.  For example, once you create your zip file, extract it into a new folder and test these steps.
  
